@@ -1,57 +1,48 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 25px;
-  font-family: 'Arial', sans-serif;
-  color: #fff;
-  background-color: #fff;
-  box-sizing: border-box;
+.output-area{
+  width: 100%;
+  min-height: 50px;
+  resize: none;
+  padding: 1%;
+  border: 1px solid grey;
+
 }
 
-.text-content {
+.active {
+  color: #f48c8f;
+  transform: scale(0.95, 0.95);
 }
 
-.keyboard {
-  background-color: black;
-  margin: auto;
-  width: 750px;
-  border-radius: 30px;
-  padding: 25px 30px 15px 30px;
-  user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+.buttons{
+  background-color: darkseagreen;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 0.5vw;
 }
-
-.row {
+.buttons__line{
+  display: grid;
+  align-items: center;
+  grid-gap: 0.5vw;
+}
+.buttons__line--first {
+  grid-template-columns: repeat(13, 1fr) 2.4fr;
+}
+.buttons__line--second {
+  grid-template-columns: 1.25fr repeat(14, 1fr);
+}
+.buttons__line--third{
+  grid-template-columns: 1.98fr repeat(11, 1fr) 1.98fr;
+}
+.buttons__line--fourth{
+  grid-template-columns: 2fr repeat(11, 1fr) 1fr;
+}
+.buttons__line--fifth{
+  grid-template-columns: 1.5fr 1fr 1fr 6.5fr 1fr 1.5fr 1fr 1fr 1fr;
+}
+.button{
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.key {
-  display: block;
-  border: 1px solid #fff;
-  text-align: center;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 40px;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.space-key {
-  min-width: 235px;
-}
-
-.capslock,
-.backspace {
-  font-size: 12px;
-}
-
-.shift {
-  font-size: 19px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: darkcyan;
 }

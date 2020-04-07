@@ -198,7 +198,7 @@ for (let i = 0; i < 64; i++) {
         secondLine.append(btn)
     } else if (i >= 29 && i < 42) {
         thirdLine.append(btn)
-    } esle if (i >= 42 && i < 55) {
+    } esle if (i >= 42 && i < 55) { // WTF?
         fourthLine.append(btn)
     } else {
         fifthLine.append(btn)
