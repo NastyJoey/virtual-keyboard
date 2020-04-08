@@ -186,99 +186,98 @@ let fifthLine = document.querySelector('.buttons__line--fifth');
 
 // добавляем кноки в ряды циклом
 for (let i = 0; i < 64; i++) {
-    let btn  = createElement('p');
-    addClass(btn, 'button');
+  let btn = createElement('p');
+  addClass(btn, 'button');
 
-    btn.textContent = buttonsArrRu[i].value; //присваиваем текст
-    btn.code = buttonsArrRu[i].code; //присваиваем код
+  btn.textContent = buttonsArrRu[i].value; //присваиваем текст
+  btn.code = buttonsArrRu[i].code; //присваиваем код
 
-    if (i < 14) {
-        firstLine.append(btn);
-    } else if (i >= 14 && i < 29) {
-        secondLine.append(btn)
-    } else if (i >= 29 && i < 42) {
-        thirdLine.append(btn)
-    } esle if (i >= 42 && i < 55) { // WTF?
-        fourthLine.append(btn)
-    } else {
-        fifthLine.append(btn)
-    }
+  if (i < 14) {
+    firstLine.append(btn);
+  } else if (i >= 14 && i < 29) {
+    secondLine.append(btn);
+  } else if (i >= 29 && i < 42) {
+    thirdLine.append(btn);
+  } else if (i >= 42 && i < 55) {
+    fourthLine.append(btn);
+  } else {
+    fifthLine.append(btn);
+  }
 }
 
 let btns = document.querySelectorAll('.button');
 
 // функция добавления в outputArea и удаления при Backspace
-keyboard.addEventlistener('click', function() {
-    let target = event.target;
+keyboard.addEventlistener('click', function () {
+  let target = event.target;
 
-    if (target.tagname.toLowerCase() === 'p') {
-        if (target.textContent.length <= 1) {
-            outputArea.textContent += target.textContent;
-        } if (target.textContent === 'Backspace') {
-            outputArea.textContent = outputArea.textContent.slice(0, -1);
-        }
+  if (target.tagname.toLowerCase() === 'p') {
+    if (target.textContent.length <= 1) {
+      outputArea.textContent += target.textContent;
     }
+    if (target.textContent === 'Backspace') {
+      outputArea.textContent = outputArea.textContent.slice(0, -1);
+    }
+  }
 });
 
-
 // добавляем active при mousedown
-keyboard.addEventlistener('mousedown', function() {
-    let target = event.target;
+keyboard.addEventlistener('mousedown', function () {
+  let target = event.target;
 
-    if (target.tagname.toLowerCase() === 'p') {
-        target.classList.addClass('active')
-    }
+  if (target.tagname.toLowerCase() === 'p') {
+    target.classList.addClass('active');
+  }
 });
 //убираем active on mouseup
 keyboard.addEventListener('mouseup', function () {
-    let target = event.target;
+  let target = event.target;
 
-    if (target.tagName.toLowerCase() === 'p') {
-        target.classList.remove('active');
-    }
+  if (target.tagName.toLowerCase() === 'p') {
+    target.classList.remove('active');
+  }
 });
 
-//UNDONE
-
+// функция нажатия физической клавиатуры
 document.addEventListener('keydown', function (event) {
-
-    event = event || window.event;
-
-
-
-   for (let i = 0; i < buttonsContextArrRu.length; i++) {
-
-       console.log(buttons[i].textContent);
-       if (event.which === buttonsContextArrRu[i].code) {
-           buttons[i].click();
-           addClass(buttons[i], 'active')
-       }
-       if (event.which === 16 && buttonsContextArrRu[i].hasOwnProperty('alt')) {
-           buttons[i].textContent = buttonsContextArrRu[i].alt;
-       }
-
-       if (event.which === 20 && buttons[i].textContent.length < 2){
-           buttons[i].textContent = buttons[i].textContent.toUpperCase();
-       }
-
-       if (event.shiftKey && event.ctrlKey){
-           buttons[i].textContent === buttonsContextArrRu[i].value ? buttons[i].textContent = buttonsContextArrEng[i].value :  buttons[i].textContent = buttonsContextArrRu[i].value  ;
-       }
-
-
-   }
+  for (let i = 0; i < buttonsArrRu.length; i++) {
+    // клик() и добавление эктива если кейкод совпал
+    if (event.which === buttonsArrRu[i].code) {
+      // which - returns the numeric keyCode
+      btns[i].click();
+      addClass(btns[i], 'active');
+    }
+    //если 16(шифт) и buttonsArrRu[i] имеет alt,  btns.textContent = buttonsArrRu[i].alt
+    if (event.which === 16 && buttonsArrRu[i].hasOwnProperty('alt')) {
+      btns[i].textContent = buttonsArrRu[i].alt;
+    }
+    //если 20(Caps). только для кнопок с длинной < 2
+    if (event.which === 20 && btns.textContent.length < 2) {
+      btns[i].textContent = btns[i].textContent.toUpperCase();
+    }
+    //смена языка. очередность одинаковая. просто берем значение с buttonsArrEng
+    if (event.shiftKey && event.ctrlKey) {
+      btns[i].textContent === buttonsArrRu[i].value
+        ? (btns[i].textContent = buttonsArrEng[i].value)
+        : (btns[i].textContent = buttonsArrRu[i].value);
+    }
+  }
 });
 
+//keyup
 document.addEventListener('keyup', function (event) {
-   for (let i = 0; i < buttonsContextArrRu.length; i++) {
-       console.log(event.which);
-
-       if (event.which === buttonsContextArrRu[i].code) {
-           removeClass(buttons[i], 'active')
-       }
-
-
-
-
-   }
+  for (let i = 0; i < buttonsArrRu.length; i++) {
+    //убираем эктив
+    if (event.which === buttonsArrRu[i].code) {
+      removeClass(btns[i], 'active');
+    }
+    //если отпустить shift должно быть стандвртное значение  buttonsArrRu[i].value
+    if (event.which === 16 && buttonsArrRu[i].hasOwnProperty('alt')) {
+      btns[i].textContent = buttonsArrRu[i].value;
+    }
+    // выключаем Сaps
+    if (event.which === 20 && btns.textContent.length < 2) {
+      btns[i].textContent = btns[i].textContent.toLowerCase();
+    }
+  }
 });
